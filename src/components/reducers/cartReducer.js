@@ -1,6 +1,6 @@
 
 import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, ADD_SHIPPING } from '../actions/action-types/cart-actions'
-import axios from 'axios';
+// import axios from 'axios';
 
 
 // const items = [
