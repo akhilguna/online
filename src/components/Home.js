@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { addToCart } from './actions/cartActions'
+import { Link } from 'react-router-dom';
 // import axios from 'axios';
+
 
 class Home extends Component {
     // state = {
@@ -28,7 +30,7 @@ class Home extends Component {
                         {/* <ul>
                             {this.state.persons.map(person => <li>{person.name}</li>)}
                         </ul> */}
-                        <img src={item.imgURL} alt={item.name} /><br />
+                       <Link to="/cart" onClick={() => { this.handleClick(item.id) }}> <img src={item.imgURL} alt={item.name} /></Link><br />
                         <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => { this.handleClick(item.id) }}><i className="material-icons">add</i></span>
                         <span className="card-title" style={{ fontSize: "20px" }}>{item.name}</span>
                     </div>
@@ -45,7 +47,7 @@ class Home extends Component {
 
         return (
             <div className="container-fluid">
-                <h3 className="center">Our items</h3>
+                <h2 className="center">Our items</h2>
                 <div className="box">
                     {itemList}
                 </div>

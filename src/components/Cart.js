@@ -50,22 +50,21 @@ class Cart extends Component {
             ) :
 
             (
-                <p>Nothing.</p>
+                <center><h1>Your Cart is Empty</h1></center>
             )
         return (
             <div className="container-fluid">
                 <h5>You have ordered:</h5>
-                <div class="row justify-content-md-center">
-                    <div className="cart col col-lg-8">
+                
+                    <div className="cart">
                         <ul className="collection">
                             {addedItems}
                         </ul>
                     </div>
 
-                    <div className=" col-md-auto">
+                    <div>
                         <Recipe />
                     </div>
-                </div>
             </div>
         )
     }
