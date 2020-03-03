@@ -9,20 +9,23 @@ import SPdetails from './components/Login/SPdetails';
 class App extends Component {
   render() {
     return (
-      // <div>
-      //   <Login />
-      // </div>
+      <React.Fragment>
+      {/* <div>
+        <Login />
+      </div> */}
       <BrowserRouter>
         <div className="App">
 
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Login} />
             <Route path="/cart" component={Cart} />
+            <Route path="/Home" component={Home} />
+            <Route path="/SPdetails" component={SPdetails} />
           </Switch>
         </div>
       </BrowserRouter>
-
+      </React.Fragment>
     );
   }
 }
