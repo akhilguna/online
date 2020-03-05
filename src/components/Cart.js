@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeItem, addQuantity, subtractQuantity } from './actions/cartActions'
+import { removeItem } from './actions/cartActions'
 import Recipe from './Recipe'
 class Cart extends Component {
 
@@ -36,10 +36,7 @@ class Cart extends Component {
                                 <p>
                                     <b>Quantity: {item.quantity}</b>
                                 </p>
-                                <div className="add-remove">
-                                    <Link to="/cart"><i className="material-icons" onClick={() => { this.handleAddQuantity(item.id) }}>add</i></Link>
-                                    <Link to="/cart"><i className="material-icons" onClick={() => { this.handleSubtractQuantity(item.id) }}>remove</i></Link>
-                                </div>
+                              
                                 <button className="waves-effect waves-light btn pink remove" onClick={() => { this.handleRemove(item.id) }}>Remove</button>
                             </div>
 
@@ -80,8 +77,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         removeItem: (id) => { dispatch(removeItem(id)) },
-        addQuantity: (id) => { dispatch(addQuantity(id)) },
-        subtractQuantity: (id) => { dispatch(subtractQuantity(id)) }
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
