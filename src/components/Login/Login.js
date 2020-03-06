@@ -72,23 +72,25 @@ class Login extends Component {
         }
 
         return (
-
-            <div className="login">
+            <div className="login100">
+            <div className="login sides">
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label>User Name</label><br />
-                    <input type="text" name="email" className=".input100" value={this.state.email} placeholder="Enter Your UserName" onChange={this.handleChange} /><br />
-                    <label>Password</label><br />
-                    <input type="password" className=".input100" name="password" value={this.state.password} placeholder="Password" onChange={this.handleChange} /><br /><br />
-
-                    <input type="submit" onClick={this.login} class="submit" name="commit" />
-
+                    <label className="txt1 pb-11">User Name</label><br/>
+                    <div class="wrap-input100 validate-input m-b-36">
+                    <input type="text" name="email" className="input100" value={this.state.email}  onChange={this.handleChange} style={{outline:'none',border:'none',height:'40px',marginBottom:'0'}} />
+                    </div>
+                    <label className="txt1 pb-11">Password</label><br />
+                    <div class="wrap-input100 validate-input m-b-36">
+                    <input type="password" className="input100" name="password" value={this.state.password}  onChange={this.handleChange}  style={{outline:'none',border:'none',height:'40px',marginBottom:'0'}}/>
+                    </div>
+                    <div class="pb-l-55">
+                    <input type="submit" onClick={this.login} class="submit" name="commit"  />
+                    </div>
                 </form>
-
-            </div>
-
+               </div>
+               </div>
         )
-
     }
 
 }

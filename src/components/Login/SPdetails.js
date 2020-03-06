@@ -1,23 +1,5 @@
 // import React, { PureComponent } from 'react'
 // import { Button } from 'semantic-ui-react';
-// import Select from 'react-select';
-// import DropDownMenu from 'material-ui/DropDownMenu';
-// import MenuItem from 'material-ui/MenuItem';
-
-// const Customers = [
-//     {  value: 'Maligai',label: 'Maligai' },
-//     {  value: 'store',label: 'store' },
-//     {  value: 'store2',label: 'store2' },
-// ]
-// const Customer1 = [
-//     {  value: 'SKS1',label: 'SKS1' },
-//     {  value: 'RET store 1',label: 'RET store 1' },
-//     {  value: 'store2',label: 'store2' },
-// ]
-// const SP_Name = [
-//     {  value: 'SP 1',label: 'SP 1' },
-//     {  value: 'SP 2',label: 'SP 2' },
-// ]
   
 // class SPdetails extends PureComponent {
 //     constructor(props) {
@@ -27,8 +9,7 @@
 //             teams: [],
 //             selectedTeam: "",
 //             validationError: "",
-//             selection : 1,
-//             selectedOption: null,
+//             
 //             list: [
 //                 {
 //                     "SP_Name": "SP 1",
@@ -62,14 +43,11 @@
 //     //         });
 //     // }
  
-//       handleChange1 = selectedOption => {
-//         this.setState({ selectedOption });
-//       };
       
 //    
 //       
 //     render() {
-//         const { selection } = this.state;
+//         const { selection } = this.state
 //         return (
 //             <div>
 //                 {/* <select
@@ -107,14 +85,14 @@
 // }
 import React, { Component } from 'react';
 import Select from 'react-select';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Button} from 'semantic-ui-react';
+import {Redirect} from 'react-router-dom';
 import './Login.css';
-
-
+import axios from 'axios';
 const Customers = [
         {  value: 'Maligai',label: 'Maligai' },
         {  value: 'store',label: 'store' },
@@ -132,6 +110,7 @@ class SPdetails extends Component {
     this.state = {
       selection : 1,
       selectedOption: null,
+      redirectToReferrer: false
     };
     this.handleChange = this.handleChange.bind(this); 
   }
@@ -147,17 +126,17 @@ class SPdetails extends Component {
   
   handleSubmit = event => {
     event.preventDefault();
+    const user = {
+      selectedOption: this.state.selectedOption,
+      selection : this.state.selection
+    };
 
-    // const user = {
-    //   selectedOption: this.state.selectedOption,
-    //   selection : this.state.selection
-    // };
-
-    // axios.post(`http://localhost:3004/comments`, { user })
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //   })
+    axios.post(`http://localhost:3004/comments`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        this.redirect()
+      })
   }
   pageControl(){
     if( this.state.selection === 1){
@@ -168,6 +147,8 @@ class SPdetails extends Component {
         onChange={this.handleChange1}
         options={Customers}
         placeholder="select"
+        className="input100"
+        style={{outline:'none',border:'none',height:'40px',marginBottom:'0'}} 
       />
       );
     } else if( this.state.selection === 2) {
@@ -178,41 +159,56 @@ class SPdetails extends Component {
         onChange={this.handleChange1}
         options={Customer1}
         placeholder="select"
+        className="input100"
+        style={{outline:'none',border:'none',height:'40px',marginBottom:'0'}} 
       />
       );
     } 
   }
-  
-
+  redirect = () => {
+    window.location.href = 'http://localhost:3000/Home';
+    // maybe can add spinner while loading
+    return null;
+  }
   render() {
-    
     return (
+      <div class="login100">
       <div className="container-login">
         <MuiThemeProvider>   
-        <div class="login">    
+        <div class="login h-500 sides">    
         <h1>Selling Product</h1> 
          <div class="ui container pt-5">
-         <form onSubmit={this.handleSubmit} class="ui form" action="/">
+         <form onSubmit={this.handleSubmit} class="ui form">
     <div class="field">
+    <label className="txt1 pb-11">SP Name</label><br/>
+    <div>
     <DropDownMenu
           value={this.state.selection} 
           onChange={this.handleChange}   
           style={{width:'100%'}}
+          className="input100"
          >
           <MenuItem value={1} primaryText="SP 1"/>
           <MenuItem value={2} primaryText="SP 2"/>
         </DropDownMenu>
     </div>
-    <div class="field">
-    {this.pageControl()}
     </div>
     <div class="field">
-    <Button variant="contained" color="primary" type="submit" href="/Home">Submit</Button>
+    <label className="txt1 pb-11">Customer</label><br/>
+      <div>
+    {this.pageControl()}
+    </div>
+    </div>
+    <div class="field">
+    <div className="pb-l-55">
+    <Button type="submit"  class="submit" color="primary">Submit</Button>
+    </div>
     </div>
         </form>
         </div>
         </div>
         </MuiThemeProvider>
+      </div>
       </div>
     );
   }
